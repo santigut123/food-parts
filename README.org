@@ -1,10 +1,11 @@
-* This is a test
-THIS DHJSKA FJKSALD HDJKSLAKJ DHJKDi
-- djsa
-- sajdjsajdla
-- djasjdla
-- djsla
-
-** THSDSD
-*** dsjadja
-**** dashdksa
+* Food Parts
+** Purpose
+Food parts is a command line program that helps you track your daily nutritional intake based on what foods you are consuming, provide educational information about various nutrients, and cater to your individual physiological circumstances in order to help you optimize your nutrition. It is my first command line program, and it is my first experience with Go. I thought it would be a fun challenge to learn Go (I'm familiar with Hugo, an awesome CMS that uses it) while also solving a problem of tracking my nutrition without needing to use a GUI with constant connection to the internet.
+** Features
+- Tracking of both Macro and Micro Nutrients
+- Modification of nutritional needs based on various factors or diet choices
+- Accurate absorption rates for various vitamins
+- Ability for the user to save recipes that then can be reused without having to input each raw ingredient
+- Supplement tracking for user to include in their nutritional picture.
+- Built in sunlight Vitamin D tracking
+- Databank where user can add new/rare food items with specific nutritional profiles
