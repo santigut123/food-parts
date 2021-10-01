@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"github.com/santigut123/food-parts/food_components"
 )
 func main(){
 	cmd := os.Args
