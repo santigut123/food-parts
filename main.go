@@ -3,14 +3,14 @@ package main
 import (
 	//	"fmt"
 	//"os"
-	//"./food_components"
-	"github.com/gdamore/tcell/v2"
-	"github.com/rivo/tview"
-	"encoding/gob"
+	//	"encoding/gob"
+
+	//	"github.com/gdamore/tcell/v2"
+	//	"github.com/rivo/tview"
+	"github.com/santigut123/food-parts/db_reader"
 )
 func main(){
-	//
-	fp:=tview.NewApplication()
+	/*	fp:=tview.NewApplication()
 	modal := tview.NewModal().
 		SetText("Do you want to quit the application?").
 		AddButtons([]string{"Quit", "Cancel"}).
@@ -37,11 +37,11 @@ func main(){
 				fp.Stop()
 			}
 		})
-	*/
 	if err := fp.SetRoot(fpView, true).SetFocus(fpView).Run(); err != nil {
 		panic(err)
 	}
-
+	*/
+	db_reader.ReadDatabase()
 
 
 

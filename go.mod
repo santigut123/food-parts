@@ -5,13 +5,15 @@ go 1.17
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d // indirect
 	github.com/martinlindhe/unit v0.0.0-20210313160520-19b60e03648d // indirect
-	github.com/rivo/tview v0.0.0-20210926181611-ee97a7ab3975
+	github.com/rivo/tview v0.0.0-20211001102648-5508f4b00266
 	github.com/russross/blackfriday/v2 v2.0.1 // indirect
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/urfave/cli/v2 v2.3.0 // indirect
 )
 
 require (
+	github.com/Vivino/go-autocomplete-trie v0.0.0-20201027090951-d3f8d75784ef
+	github.com/derekparker/trie v0.0.0-20200317170641-1fdf38b7b0e9
 	github.com/gdamore/encoding v1.0.0 // indirect
 	github.com/gdamore/tcell/v2 v2.4.1-0.20210905002822-f057f0a857a1 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
