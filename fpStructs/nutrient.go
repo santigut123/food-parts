@@ -3,30 +3,30 @@ package fpStructs
 import ("strings")
 
 type Nutrient struct{
-	mass float32
-	volume float32
-	name string
-	nType rune
+	Mass float32
+	Volume float32
+	Name string
+	Units string
+	NType rune
 }
 
 func(n *Nutrient) GetMass() float32{
-	return n.mass
+	return n.Mass
 }
 
 func(n *Nutrient) GetVolume() float32{
-	return n.volume
+	return n.Volume
 }
 
 func(n *Nutrient) GetName() string{
-	return n.name
+	return n.Name
 }
 
 func(n *Nutrient) SetName(name string) {
-	n.name=strings.ToLower(name);
+	n.Name=strings.ToLower(name);
 }
-
 func(n *Nutrient) GetTypeString() string{
-	var nType rune = n.nType
+	var nType rune = n.NType
 	var typeString string;
 	if(nType == 'v'){
 		typeString= "Vitamin"
@@ -41,5 +41,5 @@ func(n *Nutrient) GetTypeString() string{
 }
 
 func(n *Nutrient) getDensity () float32{
-	return (n.mass/n.volume)
+	return (n.Mass/n.Volume)
 }
