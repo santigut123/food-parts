@@ -1,6 +1,9 @@
 package fpStructs
 
-import ("strings")
+import (
+	"fmt"
+	"strings"
+)
 
 type Nutrient struct{
 	Mass float32
@@ -9,7 +12,9 @@ type Nutrient struct{
 	Units string
 	NType rune
 }
-
+func(n *Nutrient) PrintNutrient(){
+	fmt.Println(n.Name," ",n.Mass,n.Units," Type:",n.NType)
+}
 func(n *Nutrient) GetMass() float32{
 	return n.Mass
 }

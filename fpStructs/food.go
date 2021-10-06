@@ -23,30 +23,30 @@ type nutrients struct{
 	macros map[string]Nutrient
 }
 func(ns *nutrients) addVitamin(n Nutrient) {
-	ns.vitamins[n.name]=n
+	ns.vitamins[n.Name]=n
 }
 
 func(ns *nutrients) addMineral(n Nutrient) {
-	ns.minerals[n.name]=n
+	ns.minerals[n.Name]=n
 }
 
 func(ns *nutrients) addAminoAcid(n Nutrient) {
-	ns.amino_acids[n.name]=n
+	ns.amino_acids[n.Name]=n
 }
-
-// adds nutrient to the correct map
-func(ns *nutrients) addNutrient(n Nutrient){
-	var nType rune = n.nType
-	var name string =n.name
-	if(nType=='v'){
-		ns.vitamins[name]=n
-	}else if(nType=='m'){
-		ns.minerals[name]=n
-	}else if(nType=='a'){
-		ns.amino_acids[name]=n;
-	}else{
-		ns.macros[name]=n;
+func(ns *nutrients) PrintNutrients(){
+	for _,v:=range ns.vitamins{
+		v.PrintNutrient()
 	}
+	for _,v:=range ns.minerals{
+		v.PrintNutrient()
+	}
+	for _,v:=range ns.amino_acids{
+		v.PrintNutrient()
+	}
+	for _,v:=range ns.macros{
+		v.PrintNutrient()
+	}
+
 }
 
 type Food struct{
@@ -54,6 +54,25 @@ type Food struct{
 	Macros Macros
 	nutrients nutrients
 }
+// adds nutrient to the correct map
+func(f *Food) AddNutrient(n Nutrient){
+	var nType rune = n.NType
+	var name string =n.Name
+	if(nType=='v'){
+		f.nutrients.vitamins[name]=n
+	}else if(nType=='m'){
+		f.nutrients.minerals[name]=n
+	}else if(nType=='a'){
+		f.nutrients.amino_acids[name]=n;
+	}else{
+		f.nutrients.macros[name]=n;
+	}
+}
+func (f *Food) PrintNutrients(){
+	f.nutrients.PrintNutrients()
+
+}
+
 func NewFood(foodID FoodID,macros Macros) *Food{
 	newFood := Food{
 		FoodID:    foodID,
