@@ -16,34 +16,34 @@ type Macros struct{
 	Fat float32
 	Carbs float32
 }
-type nutrients struct{
-	vitamins map[string]Nutrient
-	minerals map[string]Nutrient
-	amino_acids map[string]Nutrient
-	macros map[string]Nutrient
+type Nutrients struct{
+	Vitamins map[string]Nutrient
+	Minerals map[string]Nutrient
+	Amino_acids map[string]Nutrient
+	Macros map[string]Nutrient
 }
-func(ns *nutrients) addVitamin(n Nutrient) {
-	ns.vitamins[n.Name]=n
-}
-
-func(ns *nutrients) addMineral(n Nutrient) {
-	ns.minerals[n.Name]=n
+func(ns *Nutrients) addVitamin(n Nutrient) {
+	ns.Vitamins[n.Name]=n
 }
 
-func(ns *nutrients) addAminoAcid(n Nutrient) {
-	ns.amino_acids[n.Name]=n
+func(ns *Nutrients) addMineral(n Nutrient) {
+	ns.Minerals[n.Name]=n
 }
-func(ns *nutrients) PrintNutrients(){
-	for _,v:=range ns.vitamins{
+
+func(ns *Nutrients) addAminoAcid(n Nutrient) {
+	ns.Amino_acids[n.Name]=n
+}
+func(ns *Nutrients) PrintNutrients(){
+	for _,v:=range ns.Vitamins{
 		v.PrintNutrient()
 	}
-	for _,v:=range ns.minerals{
+	for _,v:=range ns.Minerals{
 		v.PrintNutrient()
 	}
-	for _,v:=range ns.amino_acids{
+	for _,v:=range ns.Amino_acids{
 		v.PrintNutrient()
 	}
-	for _,v:=range ns.macros{
+	for _,v:=range ns.Macros{
 		v.PrintNutrient()
 	}
 
@@ -52,20 +52,20 @@ func(ns *nutrients) PrintNutrients(){
 type Food struct{
 	FoodID FoodID
 	Macros Macros
-	nutrients nutrients
+	nutrients Nutrients
 }
 // adds nutrient to the correct map
 func(f *Food) AddNutrient(n Nutrient){
 	var nType rune = n.NType
 	var name string =n.Name
 	if(nType=='v'){
-		f.nutrients.vitamins[name]=n
+		f.nutrients.Vitamins[name]=n
 	}else if(nType=='m'){
-		f.nutrients.minerals[name]=n
+		f.nutrients.Minerals[name]=n
 	}else if(nType=='a'){
-		f.nutrients.amino_acids[name]=n;
+		f.nutrients.Amino_acids[name]=n;
 	}else{
-		f.nutrients.macros[name]=n;
+		f.nutrients.Macros[name]=n;
 	}
 }
 func (f *Food) PrintNutrients(){
@@ -77,11 +77,11 @@ func NewFood(foodID FoodID,macros Macros) *Food{
 	newFood := Food{
 		FoodID:    foodID,
 		Macros:    macros,
-		nutrients: nutrients{
-			vitamins:    make(map[string]Nutrient),
-			minerals:    make(map[string]Nutrient),
-			amino_acids: make(map[string]Nutrient),
-			macros:      make(map[string]Nutrient),
+		nutrients: Nutrients{
+			Vitamins:    make(map[string]Nutrient),
+			Minerals:    make(map[string]Nutrient),
+			Amino_acids: make(map[string]Nutrient),
+			Macros:      make(map[string]Nutrient),
 		},
 	}
 
@@ -106,13 +106,13 @@ func(f *Food) SetMass(mass float32) {
 // Looks through all maps and returns nutrient pointer
 func(f *Food) GetNutrient(name string) *Nutrient{
 	name=strings.ToLower(name)
-	if val,present :=f.nutrients.macros[name];present{
+	if val,present :=f.nutrients.Macros[name];present{
 		return &val;
-	}else if val,present :=f.nutrients.amino_acids[name];present{
+	}else if val,present :=f.nutrients.Amino_acids[name];present{
 		return &val;
-	}else if val,present :=f.nutrients.minerals[name];present{
+	}else if val,present :=f.nutrients.Minerals[name];present{
 		return &val;
-	}else if val,present :=f.nutrients.vitamins[name];present{
+	}else if val,present :=f.nutrients.Vitamins[name];present{
 		return &val;
 	}
 	// if the program doesn't find the nutrient, return null

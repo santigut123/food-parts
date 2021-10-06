@@ -7,12 +7,10 @@ import (
 	//"fmt"
 	"io"
 	"strconv"
-
 	//	"encoding/gob"
 	//"io/ioutil"
 	"log"
 	"os"
-
 	"github.com/santigut123/food-parts/fpStructs"
 )
 const(
@@ -195,7 +193,9 @@ func ReadDatabase() *fpStructs.FoodDB{
 	// This gets the food name and IDs in the FoodDB
 	vitClassifier:=newDBVitClassifier()
 	foodDatabase:=fpStructs.NewFoodDB("USDA")
+	// Nutrient lookup map to see the name and unit of the nutrient from its id
 	nutrientLookup:= makeNutrientLookupMap()
+	// this adds the foods and nutrients to the foods
 	addFoods(foodDatabase, nutrientLookup, vitClassifier)
 	EncodeDBToFile(foodDatabase)
 	return foodDatabase

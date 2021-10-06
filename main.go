@@ -6,13 +6,11 @@ import (
 
 	//		"github.com/gdamore/tcell/v2"
 	//	"github.com/rivo/tview"
-
 	"bytes"
 	"encoding/gob"
 	"fmt"
 	"os"
 	"time"
-
 	"github.com/santigut123/food-parts/db_reader"
 	"github.com/santigut123/food-parts/fpStructs"
 )
@@ -34,7 +32,6 @@ func main(){
 		foods++
 		fmt.Println("THE NAME OF THE FOOD",v.GetName())
 	}
-
 	elapsed:=time.Since(start)
 	fmt.Println("reading ",foods," foods "," took ",elapsed)
 
