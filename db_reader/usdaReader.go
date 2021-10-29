@@ -197,6 +197,5 @@ func ReadDatabase() *fpStructs.FoodDB{
 	nutrientLookup:= makeNutrientLookupMap()
 	// this adds the foods and nutrients to the foods
 	addFoods(foodDatabase, nutrientLookup, vitClassifier)
-	EncodeDBToFile(foodDatabase)
 	return foodDatabase
 }

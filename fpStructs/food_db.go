@@ -1,7 +1,11 @@
 package fpStructs
+
 import (
+	"strings"
+
 	"github.com/derekparker/trie"
 )
+
 // This struct holds a database of food nutrition
 type FoodDB struct{
 	Name string
@@ -27,7 +31,7 @@ func(f *FoodDB) GetFoods() *map[int]Food{
 }
 func(f *FoodDB) AddFood(newFood Food){
 	f.Foods[newFood.GetID()]=newFood
-	f.Search.Add(newFood.GetName(),newFood.GetID())
+	f.Search.Add(strings.ToUpper(newFood.GetName()),newFood.GetID())
 }
 func(f *FoodDB) GetFoodSearch() *trie.Trie{
 	return &f.Search

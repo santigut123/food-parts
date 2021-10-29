@@ -1,21 +1,20 @@
-Vitamin,A,.0000001
-Vitamin,B1,.0012
-Vitamin,B2,.0013
-Vitamin,B3,.016
-Vitamin,B5,.005
-Vitamin,B6,.0013
-Vitamin,B9,.0004
-Vitamin,B12,.0000024
-Vitamin,C,.090
-Vitamin,D,.00002
-Vitamin,E,.001
-Vitamin,K,.120
-Vitamin,K2,.00002
-Vitamin,Choline,.550
-Vitamin,Folate,.0000001
-Mineral,Calcium,1.3
-Mineral,Iodine,.00015
-Mineral,Iron,.008
+Vitamin A, RAE,.0000001
+Biotin,.0012
+Riboflavin,.0013
+Niacin,B3,.016
+Pantothenic acid,B5,.005
+Vitamin B-6,.0013
+Folate, total,.0004
+Vitamin B12,.0000024
+Vitamin C, total ascorbic acid,.090
+Vitamin D (D2+D3), International Units,.00002
+Vitamin E (alpha-tocopherol),.001
+Vitamin K (Menaquinone-4),.00002
+Vitamin K (phylloquinone),.120
+Vitamin,K2,.Vitamin,Choline,.550
+"Calcium, Ca",1.3
+"Iodine I",.00015
+"Iron,Fe",.008
 Mineral,Magnesium,.400
 Mineral,Manganese,2.3
 Mineral,Phosphorus,1.250
