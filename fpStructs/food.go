@@ -2,10 +2,10 @@ package fpStructs
 
 import ("strings")
 
-// Food, composed of nutrients and has a name
+// Food, composed of Nutrients and has a name
 // Nurtients the basic sub-unit of food
 // RDA, recommended Daily Allowance, how much of something you should eat a day
-// Food, made of a mix of nutrients and has a mass and a name
+// Food, made of a mix of Nutrients and has a mass and a name
 type FoodID struct{
 	Id int
 	Name string
@@ -52,24 +52,24 @@ func(ns *Nutrients) PrintNutrients(){
 type Food struct{
 	FoodID FoodID
 	Macros Macros
-	nutrients Nutrients
+	Nutrients Nutrients
 }
 // adds nutrient to the correct map
 func(f *Food) AddNutrient(n Nutrient){
 	var nType rune = n.NType
 	var name string =n.Name
 	if(nType=='v'){
-		f.nutrients.Vitamins[name]=n
+		f.Nutrients.Vitamins[name]=n
 	}else if(nType=='m'){
-		f.nutrients.Minerals[name]=n
+		f.Nutrients.Minerals[name]=n
 	}else if(nType=='a'){
-		f.nutrients.Amino_acids[name]=n;
+		f.Nutrients.Amino_acids[name]=n;
 	}else{
-		f.nutrients.Macros[name]=n;
+		f.Nutrients.Macros[name]=n;
 	}
 }
 func (f *Food) PrintNutrients(){
-	f.nutrients.PrintNutrients()
+	f.Nutrients.PrintNutrients()
 
 }
 
@@ -77,7 +77,7 @@ func NewFood(foodID FoodID,macros Macros) *Food{
 	newFood := Food{
 		FoodID:    foodID,
 		Macros:    macros,
-		nutrients: Nutrients{
+		Nutrients: Nutrients{
 			Vitamins:    make(map[string]Nutrient),
 			Minerals:    make(map[string]Nutrient),
 			Amino_acids: make(map[string]Nutrient),
@@ -106,13 +106,13 @@ func(f *Food) SetMass(mass float32) {
 // Looks through all maps and returns nutrient pointer
 func(f *Food) GetNutrient(name string) *Nutrient{
 	name=strings.ToLower(name)
-	if val,present :=f.nutrients.Macros[name];present{
+	if val,present :=f.Nutrients.Macros[name];present{
 		return &val;
-	}else if val,present :=f.nutrients.Amino_acids[name];present{
+	}else if val,present :=f.Nutrients.Amino_acids[name];present{
 		return &val;
-	}else if val,present :=f.nutrients.Minerals[name];present{
+	}else if val,present :=f.Nutrients.Minerals[name];present{
 		return &val;
-	}else if val,present :=f.nutrients.Vitamins[name];present{
+	}else if val,present :=f.Nutrients.Vitamins[name];present{
 		return &val;
 	}
 	// if the program doesn't find the nutrient, return null

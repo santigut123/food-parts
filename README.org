@@ -10,3 +10,4 @@ Food parts is a command line program that helps you track your daily nutritional
 - Built in sunlight Vitamin D tracking
 - Databank where user can add new/rare food items with specific nutritional profiles
 ** Implemented Features
+- Reading USDA database into objects to be used in nutritional processing.

@@ -3,14 +3,17 @@ package db_reader
 // In this file we read the USDA food database csv files and transfer them to a food_db object. After we save the structure directly to a file for easy retrival.
 import (
 	"encoding/csv"
-	"encoding/gob"
+	"io/ioutil"
 	//"fmt"
 	"io"
 	"strconv"
+
 	//	"encoding/gob"
 	//"io/ioutil"
+	"encoding/json"
 	"log"
 	"os"
+
 	"github.com/santigut123/food-parts/fpStructs"
 )
 const(
@@ -111,6 +114,7 @@ func addFoods(db *fpStructs.FoodDB,nutrLookup map[int]DBNutrient,vitClassifier *
 		}
 
 		db.AddFood(*newFood)
+
 		}
 	foodNameFile.Close()
 }
@@ -183,11 +187,17 @@ func makeNutrientLookupMap() map[int]DBNutrient{
 	}
 	return nutrientMap
 }
-func EncodeDBToFile(db *fpStructs.FoodDB) {
-	file,_:=os.Create("foodDB.gob")
-	encoder := gob.NewEncoder(file)
-	encoder.Encode(db)
-	file.Close()
+func EncodeDBToFile(db *fpStructs.FoodDB,name string) {
+	file,_:=os.Create(name)
+	jsonContent,_ := json.MarshalIndent(db, "", " ")
+	file.Write(jsonContent)
+}
+func ReadDBFromFile() fpStructs.FoodDB{
+	readFile,_:= ioutil.ReadFile("foodDB.json")
+	newFoodDB :=fpStructs.FoodDB{}
+	json.Unmarshal([]byte(readFile), &newFoodDB)
+	EncodeDBToFile(&newFoodDB,"newFoodDB.json")
+	return newFoodDB
 }
 func ReadDatabase() *fpStructs.FoodDB{
 	// This gets the food name and IDs in the FoodDB

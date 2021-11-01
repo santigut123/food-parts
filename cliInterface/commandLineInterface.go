@@ -1,29 +1,46 @@
-package CLInterface
+package cliInterface
 
 import (
 	"fmt"
+
+	"github.com/santigut123/food-parts/db_reader"
+	"github.com/santigut123/food-parts/fpStructs"
 )
 type CommandInterface struct{
 	userOptions map[string]string
+	args []string
 }
-func(ci *CommandInterface) ExecuteCommand(command []string){
-	mainCommand := command[1];
+func(ci *CommandInterface) PrintFoodSearch (foodDB *fpStructs.FoodDB,foodName string){
+	foodResults:= foodDB.Search.SearchFood(foodName)
+	for _,x := range foodResults {
+		fmt.Println("Name: ",x,"ID: ",foodDB.Search.GetFoodID(x))
+	}
+}
+func(ci *CommandInterface) ExecuteCommand(){
+	mainCommand := ci.args[1];
 	if mainCommand=="help" {
 		ci.printHelp();
-	} else if mainCommand=="search"{
-		ci.search(command[2]);
-	} else if mainCommand=="process"{
-
 	} else if mainCommand=="makeTemplateRda"{
 
 	} else if mainCommand=="makeTemplateFood"{
 
+	} else {
+		db := db_reader.ReadDatabase()
+		if mainCommand=="search"{
+			ci.PrintFoodSearch(db, ci.args[2])
+		} else if mainCommand=="process"{
+
+		}
 	}
+}
+func(ci *CommandInterface) makeDatabase() *fpStructs.FoodDB{
+	db:=db_reader.ReadDatabase();
+	return db
 }
 func(ci *CommandInterface) search(searchString string){
 
 }
-func MakeCommandInterface() *CommandInterface{
+func MakeCommandInterface(args []string) *CommandInterface{
 	userOptions := make(map[string]string)
 	userOptions["help"] = "Get List Of available commands and a brief description of how they work."
 	userOptions["search"] = "Search food names and recieve closest hits and their IDs."
@@ -33,6 +50,7 @@ func MakeCommandInterface() *CommandInterface{
 
 	newCommandInterface:=CommandInterface{
 		userOptions: userOptions,
+		args:        args,
 	}
 	return &newCommandInterface
 }
