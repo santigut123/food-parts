@@ -149,6 +149,10 @@ func addAllNutrients(reader *csv.Reader,food *fpStructs.Food,nutrLookup map[int]
 			food.Macros.Fat=mass32
 			continue
 		}
+		// Ignore nutrients that have 0 mass
+		if mass32 ==0{
+			continue
+		}
 		nutrient=nutrLookup[nutrId]
 		food.AddNutrient(fpStructs.Nutrient{
 			Mass:  float32(mass),
