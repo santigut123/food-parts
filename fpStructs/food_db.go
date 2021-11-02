@@ -2,6 +2,7 @@ package fpStructs
 
 import (
 	"strings"
+
 	"github.com/derekparker/trie"
 )
 type FoodSearch struct{
@@ -18,7 +19,7 @@ func (fs *FoodSearch) addFood(name string, id int){
 	fs.searchTrie.Add(strings.ToUpper(name),id)
 }
 func(fs *FoodSearch) SearchFood(foodName string) []string{
-	return fs.searchTrie.FuzzySearch(foodName);
+	return fs.searchTrie.PrefixSearch(foodName);
 }
 func(fs *FoodSearch) GetFoodID(foodName string) int{
 	food,_:=fs.searchTrie.Find(foodName)

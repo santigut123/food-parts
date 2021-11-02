@@ -13,7 +13,8 @@ type CommandInterface struct{
 func(ci *CommandInterface) PrintFoodSearch (foodDB *fpStructs.FoodDB,foodName string){
 	foodResults:= foodDB.Search.SearchFood(foodName)
 	for _,x := range foodResults {
-		fmt.Println("Name: ",x,"ID: ",foodDB.Search.GetFoodID(x))
+		fmt.Println("--------------------------------")
+		fmt.Println("ID: ",foodDB.Search.GetFoodID(x)," \nName: ",x)
 	}
 }
 func(ci *CommandInterface) ExecuteCommand(){
