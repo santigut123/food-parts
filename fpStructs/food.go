@@ -19,7 +19,7 @@ type Macros struct{
 type Nutrients struct{
 	Vitamins map[string]Nutrient
 	Minerals map[string]Nutrient
-	Amino_acids map[string]Nutrient
+	AminoAcids map[string]Nutrient
 	Macros map[string]Nutrient
 }
 func(ns *Nutrients) addVitamin(n Nutrient) {
@@ -31,7 +31,7 @@ func(ns *Nutrients) addMineral(n Nutrient) {
 }
 
 func(ns *Nutrients) addAminoAcid(n Nutrient) {
-	ns.Amino_acids[n.Name]=n
+	ns.AminoAcids[n.Name]=n
 }
 func(ns *Nutrients) PrintNutrients(){
 	for _,v:=range ns.Vitamins{
@@ -40,7 +40,7 @@ func(ns *Nutrients) PrintNutrients(){
 	for _,v:=range ns.Minerals{
 		v.PrintNutrient()
 	}
-	for _,v:=range ns.Amino_acids{
+	for _,v:=range ns.AminoAcids{
 		v.PrintNutrient()
 	}
 	for _,v:=range ns.Macros{
@@ -63,7 +63,7 @@ func(f *Food) AddNutrient(n Nutrient){
 	}else if(nType=='m'){
 		f.Nutrients.Minerals[name]=n
 	}else if(nType=='a'){
-		f.Nutrients.Amino_acids[name]=n;
+		f.Nutrients.AminoAcids[name]=n;
 	}else{
 		f.Nutrients.Macros[name]=n;
 	}
@@ -80,7 +80,7 @@ func NewFood(foodID FoodID,macros Macros) *Food{
 		Nutrients: Nutrients{
 			Vitamins:    make(map[string]Nutrient),
 			Minerals:    make(map[string]Nutrient),
-			Amino_acids: make(map[string]Nutrient),
+			AminoAcids: make(map[string]Nutrient),
 			Macros:      make(map[string]Nutrient),
 		},
 	}
@@ -108,7 +108,7 @@ func(f *Food) GetNutrient(name string) *Nutrient{
 	name=strings.ToLower(name)
 	if val,present :=f.Nutrients.Macros[name];present{
 		return &val;
-	}else if val,present :=f.Nutrients.Amino_acids[name];present{
+	}else if val,present :=f.Nutrients.AminoAcids[name];present{
 		return &val;
 	}else if val,present :=f.Nutrients.Minerals[name];present{
 		return &val;

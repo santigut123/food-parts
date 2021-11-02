@@ -48,6 +48,11 @@ func(f *FoodDB) SetName(name string) {
 func(f *FoodDB) SetFoods(newFoods map[int]Food){
 	f.Foods=newFoods
 }
+func(f *FoodDB) GetFood(id int) *Food{
+	food := f.Foods[id]
+	return &food
+
+}
 func(f *FoodDB) GetFoods() *map[int]Food{
 	return &f.Foods
 }
