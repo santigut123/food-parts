@@ -37,8 +37,6 @@ func (ci *CommandInterface) PrintNutrients(f *fpStructs.Food){
 	for k,v := range f.Nutrients.AminoAcids{
 		fmt.Println("    Name: ",k," Amount: ", v.Mass,v.Units)
 	}
-
-
 }
 func(ci *CommandInterface) PrintFoodInfo(db *fpStructs.FoodDB){
 	id,_ := strconv.Atoi(ci.args[2])
@@ -65,8 +63,6 @@ func(ci *CommandInterface) ExecuteCommand(){
 		}else if mainCommand=="getInfo"{
 			ci.PrintFoodInfo(db)
 		}else if mainCommand=="process"{
-
-
 		}
 	}
 }

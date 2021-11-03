@@ -100,8 +100,19 @@ func(f *Food) ChangeName(name string) {
 func(f *Food) GetMass() float32{
 	return f.FoodID.Mass
 }
-func(f *Food) SetMass(mass float32) {
-	f.FoodID.Mass=mass
+func(f *Food) SetMass(mass float32,units string) {
+	units=strings.ToUpper(units)
+	if (units=="MG"){
+		f.FoodID.Mass=mass/1000
+	} else if (units=="G"){
+		f.FoodID.Mass=mass;
+
+	} else if (units=="KG"){
+		f.FoodID.Mass=mass*1000
+	} else {
+		//Here goes the planned feature of supporting standard serving sizes
+
+	}
 }
 // Looks through all maps and returns nutrient pointer
 func(f *Food) GetNutrient(name string) *Nutrient{

@@ -24,6 +24,18 @@ func (fd *FoodDay) AddFood(newFood Food){
 	fd.Foods= append(fd.Foods,newFood)
 }
 func (fd *FoodDay) AddFoodNutrients(food Food){
+	for k,v := range food.Nutrients.Macros{
+		fd.DayRDA.SetNutrient()
+	}
+	for k,v := range food.Nutrients.Vitamins{
+
+	}
+	for k,v := range food.Nutrients.Minerals{
+
+	}
+	for k,v := range food.Nutrients.AminoAcids{
+
+	}
 
 }
 func (fd *FoodDay) CountNutrients() {
