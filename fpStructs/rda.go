@@ -52,6 +52,22 @@ func(rda *RDA) UpdateNutrient(n Nutrient) {
 			}
 	}
 }
-// takes
+func (rda *RDA) printNutriPercentages(actual *RDA){
+
+}
 func(rda *RDA) PrintRDAPercentages (actual *RDA){
+
+	for k,v := range rda.RDANutri.Vitamins{
+
+
+	}
+	for k,v := range rda.RDANutri.Minerals{
+
+	}
+	for k,v := range rda.RDANutri.AminoAcids{
+
+	}
+	for k,v := range rda.RDANutri.Macros{
+
+	}
 }

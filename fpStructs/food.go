@@ -112,7 +112,6 @@ func(f *Food) SetMass(mass float32,units string) {
 		f.FoodID.Mass=mass*1000
 	} else {
 		//Here goes the planned feature of supporting standard serving sizes
-
 	}
 }
 // Looks through all maps and returns nutrient pointer
