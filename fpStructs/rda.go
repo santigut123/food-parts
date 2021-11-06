@@ -1,5 +1,7 @@
 package fpStructs
 
+import "fmt"
+
 
 type RDA struct{
 	RDANutri Nutrients
@@ -52,22 +54,21 @@ func(rda *RDA) UpdateNutrient(n Nutrient) {
 			}
 	}
 }
-func (rda *RDA) printNutriPercentages(actual *RDA){
-
+func iterateNutriPercentages(category string,actual *RDA,ref map[string]*Nutrient){
+	fmt.Printf("%s: ",category)
+	var percent float32
+	for k,referenceVal := range ref{
+		if actualVal,present := actual.RDANutri.Vitamins[k];present{
+			percent = actualVal.Mass /referenceVal.Mass
+		}else{
+			percent=0;
+		}
+		fmt.Printf("%s: %f.3 ",k,percent)
+	}
 }
 func(rda *RDA) PrintRDAPercentages (actual *RDA){
-
-	for k,v := range rda.RDANutri.Vitamins{
-
-
-	}
-	for k,v := range rda.RDANutri.Minerals{
-
-	}
-	for k,v := range rda.RDANutri.AminoAcids{
-
-	}
-	for k,v := range rda.RDANutri.Macros{
-
-	}
+	iterateNutriPercentages("Vitamins",actual,rda.RDANutri.Vitamins)
+	iterateNutriPercentages("Minerals",actual,rda.RDANutri.Minerals)
+	iterateNutriPercentages("Amino Acids",actual,rda.RDANutri.AminoAcids)
+	iterateNutriPercentages("Macros",actual,rda.RDANutri.Macros)
 }
