@@ -60,7 +60,6 @@ func(ns *Nutrients) PrintNutrients(){
 	for _,v:=range ns.Macros{
 		v.PrintNutrient()
 	}
-
 }
 
 type Food struct{

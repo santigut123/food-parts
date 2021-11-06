@@ -26,8 +26,6 @@ func(fs *FoodSearch) GetFoodID(foodName string) int{
 	id := food.Meta()
 	return id.(int)
 }
-
-
 // This struct holds a database of food nutrition
 type FoodDB struct{
 	Name string
