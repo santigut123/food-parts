@@ -113,7 +113,7 @@ func addFoods(db *fpStructs.FoodDB,nutrLookup map[int]DBNutrient,vitClassifier *
 		}
 		}
 
-		db.AddFood(*newFood)
+		db.AddFood(newFood)
 
 		}
 	foodNameFile.Close()
@@ -154,7 +154,7 @@ func addAllNutrients(reader *csv.Reader,food *fpStructs.Food,nutrLookup map[int]
 			continue
 		}
 		nutrient=nutrLookup[nutrId]
-		food.AddNutrient(fpStructs.Nutrient{
+		food.AddNutrient(&fpStructs.Nutrient{
 			Mass:  float32(mass),
 			Volume: volume,
 			Name:   nutrient.Name,

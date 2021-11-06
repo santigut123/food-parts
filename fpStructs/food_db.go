@@ -31,13 +31,13 @@ func(fs *FoodSearch) GetFoodID(foodName string) int{
 // This struct holds a database of food nutrition
 type FoodDB struct{
 	Name string
-	Foods map[int]Food
+	Foods map[int]*Food
 	Search FoodSearch
 }
 func NewFoodDB(name string) *FoodDB{
 	newDB:=FoodDB{
 		Name:   name,
-		Foods:  make(map[int]Food),
+		Foods:  make(map[int]*Food),
 		Search: *makeFoodSearch(),
 	}
 	return &newDB
@@ -45,18 +45,17 @@ func NewFoodDB(name string) *FoodDB{
 func(f *FoodDB) SetName(name string) {
 	f.Name=name;
 }
-func(f *FoodDB) SetFoods(newFoods map[int]Food){
+func(f *FoodDB) SetFoods(newFoods map[int]*Food){
 	f.Foods=newFoods
 }
 func(f *FoodDB) GetFood(id int) *Food{
 	food := f.Foods[id]
-	return &food
-
+	return food
 }
-func(f *FoodDB) GetFoods() *map[int]Food{
+func(f *FoodDB) GetFoods() *map[int]*Food{
 	return &f.Foods
 }
-func(f *FoodDB) AddFood(newFood Food){
+func(f *FoodDB) AddFood(newFood *Food){
 	f.Foods[newFood.GetID()]=newFood
 	f.Search.addFood(newFood.GetName(),newFood.GetID())
 }

@@ -14,8 +14,3 @@ func MakeRDAInterpreter(actual RDA, standard RDA) *RDAInterpreter {
 	}
 	return &newRDAI
 }
-func(RDAI *RDAInterpreter) GetNutriPercentages() map[string]int{
-
-
-
-}
