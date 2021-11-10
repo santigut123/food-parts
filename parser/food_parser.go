@@ -13,9 +13,9 @@ import (
 type FileParser struct {
 	filename string
 	fileType string
-	db fpStructs.FoodDB
+	db *fpStructs.FoodDB
 }
-func NewFileParser(fileName string, fileType string,db fpStructs.FoodDB) *FileParser{
+func NewFileParser(fileName string, fileType string,db *fpStructs.FoodDB) *FileParser{
 	nfp:=FileParser{
 		filename: fileName,
 		fileType: fileType,

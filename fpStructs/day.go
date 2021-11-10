@@ -23,6 +23,18 @@ func NewFoodDay (name string,rda RDA) *FoodDay{
 func (fd *FoodDay) AddFood(newFood Food){
 	fd.Foods= append(fd.Foods,newFood)
 }
-func (fd *FoodDay) CountNutrients() {
 
+func (fd *FoodDay)countFoodNutrients(nMap map[string]*Nutrient){
+	for _,n := range nMap{
+		fd.DayRDA.UpdateNutrient(*n)
+	}
+}
+
+func (fd *FoodDay) CountNutrientsRDA() {
+	for _,f := range fd.Foods{
+		fd.countFoodNutrients(f.Nutrients.Vitamins)
+		fd.countFoodNutrients(f.Nutrients.Minerals)
+		fd.countFoodNutrients(f.Nutrients.AminoAcids)
+		fd.countFoodNutrients(f.Nutrients.Macros)
+	}
 }

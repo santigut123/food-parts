@@ -6,6 +6,7 @@ import (
 
 	"github.com/santigut123/food-parts/db_reader"
 	"github.com/santigut123/food-parts/fpStructs"
+	"github.com/santigut123/food-parts/parser"
 )
 type CommandInterface struct{
 	userOptions map[string]string
@@ -45,8 +46,11 @@ func(ci *CommandInterface) PrintFoodInfo(db *fpStructs.FoodDB){
 	fmt.Println("Name:",food.GetName())
 	ci.PrintNutrients(food)
 }
-func(ci* CommandInterface) ProcessFile (filename string){
-
+func(ci* CommandInterface) ProcessFile (filename string, db *fpStructs.FoodDB,ref *fpStructs.RDA){
+	nfp := parser.NewFileParser(filename, "Foods", db)
+	foodDay := nfp.ReadFoodDayFile("Test")
+	foodDay.CountNutrientsRDA()
+	ref.PrintRDAPercentages(&foodDay.DayRDA)
 }
 func(ci *CommandInterface) ExecuteCommand(){
 	mainCommand := ci.args[1];
@@ -63,6 +67,8 @@ func(ci *CommandInterface) ExecuteCommand(){
 		}else if mainCommand=="getInfo"{
 			ci.PrintFoodInfo(db)
 		}else if mainCommand=="process"{
+			refRDA :=
+			ci.ProcessFile(ci.args[2], db, )
 		}
 	}
 }
