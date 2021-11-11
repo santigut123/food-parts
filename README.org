@@ -1,8 +1,9 @@
-* Food Parts
+* /Food Parts: A Terminal Nutritional Tracking App/
 ** Purpose
 Food parts is a command line program that helps you track your daily nutritional intake based on what foods you are consuming, provide educational information about various nutrients, and cater to your individual physiological circumstances in order to help you optimize your nutrition.
 
 In its current scope, it is really meant for programmers to use quickly and easily to find out if what they are eating is nutritious enough to meet their needs. Daily nutrition files can be edited in Vim, Emacs, or any other text editor and can be quickly processed in the command line.
+
 ** Planned Features
 - Tracking of both Macro and Micro Nutrients
 - Modification of nutritional needs based on various factors or diet choices
@@ -10,5 +11,8 @@ In its current scope, it is really meant for programmers to use quickly and easi
 - Ability for the user to save recipes that then can be reused without having to input each raw ingredient
 - Supplement tracking for user to include in their nutritional picture.
 - Built in sunlight Vitamin D tracking
+
 ** Implemented Features
 - Reading USDA database into objects to be used in nutritional processing.
+- Can search through the USDA and print nutritional information about any of the 7,000 foods tracked by the SR Legacy Food Database.
+- Smart searching to find the USDA ID used to identify a food
