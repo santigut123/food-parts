@@ -24,7 +24,7 @@ func(rda *RDA) UpdateNutrient(nName string,nType rune, nMass float32) {
 	// Must change out specific references to vitamins/minerals
 	switch nType{
 		case 'v':
-			if val, present:=nutrients.Vitamins[n.Name];present{
+			if val, present:=nutrients.Vitamins[nName];present{
 				val.Mass += nMass
 			}else{
 				newNutri := Nutrient{
@@ -37,7 +37,7 @@ func(rda *RDA) UpdateNutrient(nName string,nType rune, nMass float32) {
 				nutrients.Vitamins[nName]=&newNutri
 			}
 		case 'm':
-			if val, present:=nutrients.Vitamins[n.Name];present{
+			if val, present:=nutrients.Minerals[nName];present{
 				val.Mass+=nMass
 			}else{
 				newNutri := Nutrient{
@@ -47,11 +47,11 @@ func(rda *RDA) UpdateNutrient(nName string,nType rune, nMass float32) {
 					Units:  "G",
 					NType:  nType,
 				}
-				nutrients.Vitamins[nName]=&newNutri
+				nutrients.Minerals[nName]=&newNutri
 			}
 
 		case 'a':
-			if val, present:=nutrients.Vitamins[n.Name];present{
+			if val, present:=nutrients.AminoAcids[nName];present{
 				val.Mass+=nMass
 			}else{
 				newNutri := Nutrient{
@@ -61,11 +61,11 @@ func(rda *RDA) UpdateNutrient(nName string,nType rune, nMass float32) {
 					Units:  "G",
 					NType:  nType,
 				}
-				nutrients.Vitamins[nName]=&newNutri
+				nutrients.AminoAcids[nName]=&newNutri
 			}
 
 		case 'M':
-			if val, present:=nutrients.Vitamins[n.Name];present{
+			if val, present:=nutrients.Macros[nName];present{
 				val.Mass+=nMass
 			}else{
 				newNutri := Nutrient{
@@ -75,7 +75,7 @@ func(rda *RDA) UpdateNutrient(nName string,nType rune, nMass float32) {
 					Units:  "G",
 					NType:  nType,
 				}
-				nutrients.Vitamins[nName]=&newNutri
+				nutrients.Macros[nName]=&newNutri
 			}
 	}
 }

@@ -46,8 +46,8 @@ func(ci *CommandInterface) PrintFoodInfo(db *fpStructs.FoodDB){
 	fmt.Println("Name:",food.GetName())
 	ci.PrintNutrients(food)
 }
-func(ci* CommandInterface) ProcessFile (filename string, db *fpStructs.FoodDB,ref *fpStructs.RDA){
-	nfp := parser.NewFileParser(filename, "Foods", db)
+func(ci* CommandInterface) ProcessFoodFile (filename string, db *fpStructs.FoodDB,ref *fpStructs.RDA){
+	nfp := parser.NewFoodParser(filename, "Foods", db)
 	foodDay := nfp.ReadFoodDayFile("Test")
 	foodDay.CountNutrientsRDA()
 	ref.PrintRDAPercentages(&foodDay.DayRDA)
@@ -56,10 +56,7 @@ func(ci *CommandInterface) ExecuteCommand(){
 	mainCommand := ci.args[1];
 	if mainCommand=="help" {
 		ci.printHelp();
-	} else if mainCommand=="makeTemplateRda"{
-
 	} else if mainCommand=="makeTemplateFood"{
-
 	} else {
 		db := db_reader.ReadDatabase()
 		if mainCommand=="search"{
@@ -67,17 +64,14 @@ func(ci *CommandInterface) ExecuteCommand(){
 		}else if mainCommand=="getInfo"{
 			ci.PrintFoodInfo(db)
 		}else if mainCommand=="process"{
-			refRDA :=
-			ci.ProcessFile(ci.args[2], db, )
+			refRDA:=parser.GetReferenceRDA()
+			ci.ProcessFoodFile(ci.args[2], db, refRDA)
 		}
 	}
 }
 func(ci *CommandInterface) makeDatabase() *fpStructs.FoodDB{
 	db:=db_reader.ReadDatabase();
 	return db
-}
-func(ci *CommandInterface) search(searchString string){
-
 }
 func MakeCommandInterface(args []string) *CommandInterface{
 	userOptions := make(map[string]string)
