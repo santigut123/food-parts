@@ -16,3 +16,4 @@ In its current scope, it is really meant for programmers to use quickly and easi
 - Reading USDA database into objects to be used in nutritional processing.
 - Can search through the USDA and print nutritional information about any of the 7,000 foods tracked by the SR Legacy Food Database.
 - Smart searching to find the USDA ID used to identify a food
+- Make Food Day file and give you a RDA synopsis based on standard RDI recommendations from the USDA
