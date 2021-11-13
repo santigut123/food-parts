@@ -18,7 +18,20 @@ func(n *Nutrient) PrintNutrient(){
 func(n *Nutrient) GetMass() float32{
 	return n.Mass
 }
+func(n *Nutrient) ConvertToGrams() float32{
+	if(n.Units=="G"){
+		return n.Mass
+	} else if (n.Units=="MG"){
+		return n.Mass/1000
+	} else if (n.Units=="UG"){
+		return n.Mass/1000000
+	}
+	return n.Mass
+}
+func(n *Nutrient) GetDensityGrams() float32{
+	return n.ConvertToGrams()/n.Volume
 
+}
 func(n *Nutrient) GetVolume() float32{
 	return n.Volume
 }

@@ -2,10 +2,12 @@ package foodParser
 
 import (
 	"encoding/csv"
+	"fmt"
 	"io"
 	"log"
 	"os"
 	"strconv"
+
 	"github.com/santigut123/food-parts/fpStructs"
 )
 
@@ -15,16 +17,21 @@ type RDAParser struct {
 }
 func GetReferenceRDA() *fpStructs.RDA{
 	RDAP := RDAParser{
-		fileName: "ReferenceRDA",
-		fileType: "../assets/rdi.txt",
+		fileName: GetFileLoc("/assets/rdi.txt"),
+		fileType: "RDA",
 	}
 	return 	RDAP.ReadRDA()
-
 }
+func GetFileLoc(relDirectory string) string {
+	// gets the directory the program is in and then finds the Database
+	pwd, _ := os.Getwd()
+	filePath := pwd + relDirectory
+	return filePath
+}
+
 func NewRDAParser(fileName string, fileType string) *RDAParser {
 	// Eventually you will be able to change edit RDA properties in order
 	// to account for macro and micro-nutirient differences in various diets
-
 	nRDAP := RDAParser{
 		fileName: fileName,
 		fileType: fileType,
@@ -32,9 +39,10 @@ func NewRDAParser(fileName string, fileType string) *RDAParser {
 	return &nRDAP
 }
 func (RDAP *RDAParser) parseRDAFile(rda *fpStructs.RDA) {
+	fmt.Println()
 	rdaFile, err := os.Open(RDAP.fileName)
 	if err != nil {
-		log.Println("Did not the RDA File")
+		log.Println("Did not find the RDA File")
 		panic(err)
 	}
 	// The RDA file is stored in CSV format

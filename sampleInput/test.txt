@@ -1,4 +1,2 @@
 // This Would be a sample input
-
-123556 6.5G
-1234 2.5G
+170809 100G

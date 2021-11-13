@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/santigut123/food-parts/db_reader"
+	"github.com/santigut123/food-parts/foodParser"
 	"github.com/santigut123/food-parts/fpStructs"
-	"github.com/santigut123/food-parts/parser"
 )
 type CommandInterface struct{
 	userOptions map[string]string
@@ -39,6 +39,13 @@ func (ci *CommandInterface) PrintNutrients(f *fpStructs.Food){
 		fmt.Println("    Name: ",k," Amount: ", v.Mass,v.Units)
 	}
 }
+func(ci *CommandInterface) PrintFoodDay(f *fpStructs.FoodDay){
+
+	for _,f := range f.Foods{
+		ci.PrintNutrients(&f)
+	}
+
+}
 func(ci *CommandInterface) PrintFoodInfo(db *fpStructs.FoodDB){
 	id,_ := strconv.Atoi(ci.args[2])
 	food := db.GetFood(id)
@@ -47,9 +54,11 @@ func(ci *CommandInterface) PrintFoodInfo(db *fpStructs.FoodDB){
 	ci.PrintNutrients(food)
 }
 func(ci* CommandInterface) ProcessFoodFile (filename string, db *fpStructs.FoodDB,ref *fpStructs.RDA){
-	nfp := parser.NewFoodParser(filename, "Foods", db)
+	nfp := foodParser.NewFoodParser(filename, "Foods", db)
 	foodDay := nfp.ReadFoodDayFile("Test")
 	foodDay.CountNutrientsRDA()
+	fmt.Println("DAY RDA")
+	foodDay.DayRDA.PrintRDA()
 	ref.PrintRDAPercentages(&foodDay.DayRDA)
 }
 func(ci *CommandInterface) ExecuteCommand(){
@@ -64,7 +73,9 @@ func(ci *CommandInterface) ExecuteCommand(){
 		}else if mainCommand=="getInfo"{
 			ci.PrintFoodInfo(db)
 		}else if mainCommand=="process"{
-			refRDA:=parser.GetReferenceRDA()
+			refRDA:=foodParser.GetReferenceRDA()
+			fmt.Println("REF RDA")
+			refRDA.PrintRDA()
 			ci.ProcessFoodFile(ci.args[2], db, refRDA)
 		}
 	}

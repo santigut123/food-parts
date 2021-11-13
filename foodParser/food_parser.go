@@ -52,11 +52,16 @@ func(fp *FoodParser) ReadFoodDayFile(dayname string) *fpStructs.FoodDay{
 	}
 
 	s := bufio.NewScanner(fdFile)
-		newFd := fpStructs.FoodDay{
+	newFd := fpStructs.FoodDay{
 		Name:        dayname,
 		Foods:       []fpStructs.Food{},
 		DayRDA:      fpStructs.RDA{
-			RDANutri: fpStructs.Nutrients{},
+			RDANutri: fpStructs.Nutrients{
+				Vitamins:   map[string]*fpStructs.Nutrient{},
+				Minerals:   map[string]*fpStructs.Nutrient{},
+				AminoAcids: map[string]*fpStructs.Nutrient{},
+				Macros:     map[string]*fpStructs.Nutrient{},
+			},
 		},
 		RDAStandard: *GetReferenceRDA(),
 	}
@@ -74,15 +79,10 @@ func(fp *FoodParser) ReadFoodDayFile(dayname string) *fpStructs.FoodDay{
 		if s.Text()=="\n"{
 			continue
 		}
-		fmt.Sscanf(s.Text(),"%d %d%s",&id,&mass,&units)
+		fmt.Sscanf(s.Text(),"%d %f%s",&id,&mass,&units)
 		curFood=*fp.db.GetFood(id)
-		newFood:=fpStructs.Food{
-			FoodID:    curFood.FoodID,
-			Macros:    curFood.Macros,
-			Nutrients: curFood.Nutrients,
-		}
-		newFood.SetMass(mass, units)
+		curFood.SetMass(mass, units)
+		newFd.AddFood(curFood)
 	}
-
 	return &newFd
 }

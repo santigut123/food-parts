@@ -79,21 +79,25 @@ func(rda *RDA) UpdateNutrient(nName string,nType rune, nMass float32) {
 			}
 	}
 }
-func iterateNutriPercentages(category string,actual *RDA,ref map[string]*Nutrient){
-	fmt.Printf("%s: ",category)
+func iterateNutriPercentages(category string,actual map[string]*Nutrient,ref map[string]*Nutrient){
+	fmt.Printf("%s:  \n",category)
 	var percent float32
 	for k,referenceVal := range ref{
-		if actualVal,present := actual.RDANutri.Vitamins[k];present{
-			percent = actualVal.Mass /referenceVal.Mass
+		if actualVal,present := actual[k];present&&actual[k].Mass!=0{
+			percent = actualVal.Mass/referenceVal.Mass
+			percent *= 100
 		}else{
 			percent=0;
 		}
-		fmt.Printf("%s: %f.3 ",k,percent)
+		fmt.Printf("%s: %.3f %% \n ",k,percent)
 	}
 }
+func(rda *RDA) PrintRDA(){
+	rda.RDANutri.PrintNutrients()
+}
 func(rda *RDA) PrintRDAPercentages (actual *RDA){
-	iterateNutriPercentages("Vitamins",actual,rda.RDANutri.Vitamins)
-	iterateNutriPercentages("Minerals",actual,rda.RDANutri.Minerals)
-	iterateNutriPercentages("Amino Acids",actual,rda.RDANutri.AminoAcids)
-	iterateNutriPercentages("Macros",actual,rda.RDANutri.Macros)
+	iterateNutriPercentages("Vitamins",actual.RDANutri.Vitamins,rda.RDANutri.Vitamins)
+	iterateNutriPercentages("Minerals",actual.RDANutri.Minerals,rda.RDANutri.Minerals)
+	iterateNutriPercentages("Amino Acids",actual.RDANutri.AminoAcids,rda.RDANutri.AminoAcids)
+	iterateNutriPercentages("Macros",actual.RDANutri.Macros,rda.RDANutri.Macros)
 }
