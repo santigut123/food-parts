@@ -4,6 +4,8 @@ package db_reader
 import (
 	"encoding/csv"
 	"io/ioutil"
+	"math"
+
 	//"fmt"
 	"io"
 	"strconv"
@@ -132,6 +134,8 @@ func addAllNutrients(reader *csv.Reader, food *fpStructs.Food, nutrLookup map[in
 	var nutrId int
 	var nutrient DBNutrient
 	var nutrErr error
+	// This is the amount of KJ in a KC. The measurement used by the public is KCAL so we convert it to that later
+	var kjInKC float32= 4.184
 	// if the id matches, add nutrient to the food
 	for ; (nutrErr == nil) && ((*line)[1] == foodID); *line, nutrErr = reader.Read() {
 		if nutrErr == io.EOF {
@@ -154,6 +158,16 @@ func addAllNutrients(reader *csv.Reader, food *fpStructs.Food, nutrLookup map[in
 		} else if vitClassifier.IsFat(nutrId) {
 			food.Macros.Fat = mass32
 			continue
+		} else if nutrId==1062{
+			food.AddNutrient(&fpStructs.Nutrient{
+				Mass:   mass32/kjInKC,
+				Volume: volume,
+				Name:   "Calories",
+				Units:  "KCAL",
+				NType:  'M',
+			})
+
+
 		}
 		// Ignore nutrients that have 0 mass
 		if mass32 == 0 {
