@@ -56,10 +56,11 @@ func(ci *CommandInterface) PrintFoodInfo(db *fpStructs.FoodDB){
 func(ci* CommandInterface) ProcessFoodFile (filename string, db *fpStructs.FoodDB,ref *fpStructs.RDA){
 	nfp := foodParser.NewFoodParser(filename, "Foods", db)
 	foodDay := nfp.ReadFoodDayFile("Test")
-	foodDay.CountNutrientsRDA()
-	fmt.Println("DAY RDA")
-	foodDay.DayRDA.PrintRDA()
+	foodDay.CountNutrients()
 	ref.PrintRDAPercentages(&foodDay.DayRDA)
+}
+func(ci* CommandInterface) AddRecipeFile(filename string,db *fpStructs.FoodDB){
+	db_reader.AddRecipe(db,filename)
 }
 func(ci *CommandInterface) ExecuteCommand(){
 	mainCommand := ci.args[1];
@@ -74,9 +75,9 @@ func(ci *CommandInterface) ExecuteCommand(){
 			ci.PrintFoodInfo(db)
 		}else if mainCommand=="process"{
 			refRDA:=foodParser.GetReferenceRDA()
-			fmt.Println("REF RDA")
-			refRDA.PrintRDA()
 			ci.ProcessFoodFile(ci.args[2], db, refRDA)
+		}else if mainCommand=="addRecipe"{
+			ci.AddRecipeFile(ci.args[2], db)
 		}
 	}
 }

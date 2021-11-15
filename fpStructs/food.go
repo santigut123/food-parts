@@ -11,11 +11,6 @@ type FoodID struct{
 	Name string
 	Mass float32
 }
-type Macros struct{
-	Protein float32
-	Fat float32
-	Carbs float32
-}
 type Nutrients struct{
 	Vitamins map[string]*Nutrient
 	Minerals map[string]*Nutrient
@@ -64,7 +59,6 @@ func(ns *Nutrients) PrintNutrients(){
 
 type Food struct{
 	FoodID FoodID
-	Macros Macros
 	Nutrients Nutrients
 }
 func (f *Food) PrintNutrients(){
@@ -74,10 +68,9 @@ func (f *Food) AddNutrient(n *Nutrient){
 	f.Nutrients.AddNutrient(n)
 }
 
-func NewFood(foodID FoodID,macros Macros) *Food{
+func NewFood(foodID FoodID) *Food{
 	newFood := Food{
 		FoodID:    foodID,
-		Macros:    macros,
 		Nutrients: Nutrients{
 			Vitamins:   map[string]*Nutrient{},
 			Minerals:   map[string]*Nutrient{},

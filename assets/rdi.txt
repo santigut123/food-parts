@@ -46,3 +46,7 @@ AminoAcid,Glycine,0
 AminoAcid,Proline,0
 AminoAcid,Serine,0
 AminoAcid,Hydroxyproline,0
+Macro,Calories,2000
+Macro,Protein,100
+Macro,Fat,50
+Macro,Carbs,130

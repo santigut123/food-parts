@@ -30,7 +30,6 @@ func(n *Nutrient) ConvertToGrams() float32{
 }
 func(n *Nutrient) GetDensityGrams() float32{
 	return n.ConvertToGrams()/n.Volume
-
 }
 func(n *Nutrient) GetVolume() float32{
 	return n.Volume

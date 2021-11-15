@@ -31,12 +31,14 @@ type FoodDB struct{
 	Name string
 	Foods map[int]*Food
 	Search FoodSearch
+	Recipes map[string]Recipe
 }
 func NewFoodDB(name string) *FoodDB{
 	newDB:=FoodDB{
-		Name:   name,
-		Foods:  make(map[int]*Food),
-		Search: *makeFoodSearch(),
+		Name:    name,
+		Foods:   make(map[int]*Food),
+		Search:  *makeFoodSearch(),
+		Recipes: map[string]Recipe{},
 	}
 	return &newDB
 }
@@ -56,4 +58,11 @@ func(f *FoodDB) GetFoods() *map[int]*Food{
 func(f *FoodDB) AddFood(newFood *Food){
 	f.Foods[newFood.GetID()]=newFood
 	f.Search.addFood(newFood.GetName(),newFood.GetID())
+}
+func(f *FoodDB) AddRecipe (r Recipe){
+	f.Recipes[r.name] = r
+}
+func(f *FoodDB) GetRecipeFoods(recipeName string) []Food{
+	return f.Recipes[recipeName].ingredients
+
 }

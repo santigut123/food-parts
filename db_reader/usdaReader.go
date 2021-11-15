@@ -4,7 +4,6 @@ package db_reader
 import (
 	"encoding/csv"
 	"io/ioutil"
-	"math"
 
 	//"fmt"
 	"io"
@@ -16,6 +15,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/santigut123/food-parts/foodParser"
 	"github.com/santigut123/food-parts/fpStructs"
 )
 
@@ -107,13 +107,7 @@ func addFoods(db *fpStructs.FoodDB, nutrLookup map[int]DBNutrient, vitClassifier
 			Id:   id,
 			Name: name,
 			Mass: usdaWeightGrams,
-		},
-			fpStructs.Macros{
-				Protein: 0,
-				Fat:     0,
-				Carbs:   0,
-			})
-
+		})
 		if nutrErr == nil {
 			if nutrLine[1] == line[0] {
 				nutrErr = addAllNutrients(nutrReader, newFood, nutrLookup, line[0], vitClassifier, &nutrLine)
@@ -147,18 +141,8 @@ func addAllNutrients(reader *csv.Reader, food *fpStructs.Food, nutrLookup map[in
 		mass, _ = strconv.ParseFloat((*line)[3], 32)
 		mass32 = float32(mass)
 		nutrId, _ = strconv.Atoi((*line)[2])
-		// if a nutrient is a total macro, set the food var instead of adding it to its nutrients
-		if vitClassifier.IsProtein(nutrId) {
-			food.Macros.Protein = mass32
-			continue
-		} else if vitClassifier.IsCarbs(nutrId) {
-			food.Macros.Carbs = mass32
-			continue
-
-		} else if vitClassifier.IsFat(nutrId) {
-			food.Macros.Fat = mass32
-			continue
-		} else if nutrId==1062{
+		// Here is where we convert from KJ to KCAL and add to food
+		if nutrId==1062{
 			food.AddNutrient(&fpStructs.Nutrient{
 				Mass:   mass32/kjInKC,
 				Volume: volume,
@@ -166,8 +150,7 @@ func addAllNutrients(reader *csv.Reader, food *fpStructs.Food, nutrLookup map[in
 				Units:  "KCAL",
 				NType:  'M',
 			})
-
-
+			continue
 		}
 		// Ignore nutrients that have 0 mass
 		if mass32 == 0 {
@@ -224,13 +207,38 @@ func ReadDBFromFile() fpStructs.FoodDB {
 	EncodeDBToFile(&newFoodDB, "newFoodDB.json")
 	return newFoodDB
 }
+// gets recipies from saved JSON
+func RetrieveRecipies() map[string]fpStructs.Recipe{
+
+	recpFile,err:=ioutil.ReadFile(GetFileLoc("/recipes/recipes.json"))
+	retrivedRecipes:= make(map[string]fpStructs.Recipe)
+	if err!= nil{
+		return retrivedRecipes
+	}
+	json.Unmarshal([]byte(recpFile), &retrivedRecipes)
+	return retrivedRecipes
+
+}
+// Saves Recipes when there is a change
+func SaveRecipies(rs map[string]fpStructs.Recipe) {
+	recpFile,_ :=os.Create(GetFileLoc("/recipes/recipes.json"))
+	jsonContent,_ := json.Marshal(rs)
+	recpFile.Write(jsonContent)
+}
+func AddRecipe(foodDB *fpStructs.FoodDB,recipeLoc string) {
+	 rp:= foodParser.NewFoodParser(recipeLoc,"Recipe",foodDB)
+	 foodDB.AddRecipe(rp.ReadRecipeFile())
+	 SaveRecipies(foodDB.Recipes)
+}
 func ReadDatabase() *fpStructs.FoodDB {
 	// This gets the food name and IDs in the FoodDB
 	vitClassifier := newDBVitClassifier()
 	foodDatabase := fpStructs.NewFoodDB("USDA")
+	foodDatabase.Recipes=RetrieveRecipies()
 	// Nutrient lookup map to see the name and unit of the nutrient from its id
 	nutrientLookup := makeNutrientLookupMap()
 	// this adds the foods and nutrients to the foods
 	addFoods(foodDatabase, nutrientLookup, vitClassifier)
+
 	return foodDatabase
 }
