@@ -1,11 +1,19 @@
-* Food Parts
+* /Food Parts: A Terminal Nutritional Tracking App/
 ** Purpose
-Food parts is a command line program that helps you track your daily nutritional intake based on what foods you are consuming, provide educational information about various nutrients, and cater to your individual physiological circumstances in order to help you optimize your nutrition. It is my first command line program, and it is my first experience with Go. I thought it would be a fun challenge to learn Go (I'm familiar with Hugo, an awesome CMS that uses it) while also solving a problem of tracking my nutrition without needing to use a GUI with constant connection to the internet.
-** Features
+Food parts is a command line program that helps you track your daily nutritional intake based on what foods you are consuming, provide educational information about various nutrients, and cater to your individual physiological circumstances in order to help you optimize your nutrition.
+
+In its current scope, it is really meant for programmers to use quickly and easily to find out if what they are eating is nutritious enough to meet their needs. Daily nutrition files can be edited in Vim, Emacs, or any other text editor and can be quickly processed in the command line.
+
+** Planned Features
 - Tracking of both Macro and Micro Nutrients
 - Modification of nutritional needs based on various factors or diet choices
 - Accurate absorption rates for various vitamins
 - Ability for the user to save recipes that then can be reused without having to input each raw ingredient
 - Supplement tracking for user to include in their nutritional picture.
 - Built in sunlight Vitamin D tracking
-- Databank where user can add new/rare food items with specific nutritional profiles
+
+** Implemented Features
+- Reading USDA database into objects to be used in nutritional processing.
+- Can search through the USDA and print nutritional information about any of the 7,000 foods tracked by the SR Legacy Food Database.
+- Smart searching to find the USDA ID used to identify a food
+- Make Food Day file and give you a RDA synopsis based on standard RDI recommendations from the USDA

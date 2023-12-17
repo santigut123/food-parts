@@ -1,0 +1,47 @@
+Vitamin,"Vitamin A, RAE",.0000001
+Vitamin,"Biotin",.0012
+Vitamin,"Riboflavin,".0013
+Vitamin,"Niacin,B3",.016
+Vitamin,"Pantothenic acid,B5",.005
+Vitamin,"Vitamin B-6",.0013
+Vitamin,"Folate, total",.0004
+Vitamin,"Vitamin B12",.0000024
+Vitamin,"Vitamin C, total ascorbic acid",.090
+Vitamin,"Vitamin D (D2+D3), International Units",.00002
+Vitamin,"Vitamin E (alpha-tocopherol)",.001
+Vitamin,"Vitamin K (Menaquinone-4)",.00002
+Vitamin,"Vitamin K (phylloquinone)",.120
+Vitamin,"Vitamin,K2",.Vitamin,Choline,.550
+Mineral,"Calcium, Ca",1.3
+Mineral,"Iodine I",.00015
+Mineral,"Iron,Fe",.008
+Mineral,"Magnesium, Mg",.400
+Mineral,"Manganese, Mn",2.3
+Mineral,"Phosphorus, P",1.250
+Mineral,"Potassium, K",4.7
+Mineral,"Selenium, Se",.000055
+Mineral,"Sodium, Na",1.5
+Mineral,"Zinc, Zn",.011
+Mineral,"Chlorine, Cl", 3.4
+Mineral,"Chromium, Cr",.0012
+Mineral,"Copper, Cu",.0009
+Mineral,"Molybdenum, Mo",0.00004
+AminoAcid,Tryptophan,.280
+AminoAcid,Histidine,.700
+AminoAcid,Threonine,1.050
+AminoAcid,Isoleucine,1.4
+AminoAcid,Lysine,2.1
+AminoAcid,Leucine,2.730
+AminoAcid,Methionine,.728
+AminoAcid,Cystine,.287
+AminoAcid,Phenylalanine,.875
+AminoAcid,Tyrosine,.875
+AminoAcid,Valine,1.820
+AminoAcid,Arginine,0
+AminoAcid,Alanine,0
+AminoAcid,Aspartic acid,0
+AminoAcid,Glutamic acid,0
+AminoAcid,Glycine,0
+AminoAcid,Proline,0
+AminoAcid,Serine,0
+AminoAcid,Hydroxyproline,0
